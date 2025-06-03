@@ -8,8 +8,8 @@ contract TransferTest is BaseTest {
         DefaultTestData memory defaultData,
         address userA,
         address userB,
-        uint128 mintAmount,
-        uint128 transferAmount
+        uint256 mintAmount,
+        uint256 transferAmount
     ) public testWithPredefinedDefaultValues(defaultData) {
         vm.assume(userA != address(0));
         vm.assume(userB != address(0));
@@ -43,7 +43,7 @@ contract TransferTest is BaseTest {
         DefaultTestData memory defaultData,
         address userA,
         address userB,
-        uint128 transferAmount
+        uint256 transferAmount
     ) public testWithPredefinedDefaultValues(defaultData) {
         vm.assume(userA != address(0));
         vm.assume(userB != address(0));
@@ -61,7 +61,7 @@ contract TransferTest is BaseTest {
         assertEq(ltv.balanceOf(userB), 0);
     }
 
-    function test_zeroTransfer(DefaultTestData memory defaultData, address userA, address userB, uint128 mintAmount)
+    function test_zeroTransfer(DefaultTestData memory defaultData, address userA, address userB, uint256 mintAmount)
         public
         testWithPredefinedDefaultValues(defaultData)
     {
@@ -92,8 +92,8 @@ contract TransferTest is BaseTest {
     function test_selfTransfer(
         DefaultTestData memory defaultData,
         address userA,
-        uint128 mintAmount,
-        uint128 transferAmount
+        uint256 mintAmount,
+        uint256 transferAmount
     ) public testWithPredefinedDefaultValues(defaultData) {
         vm.assume(userA != address(0));
         vm.assume(userA != defaultData.owner);
@@ -147,8 +147,8 @@ contract TransferTest is BaseTest {
         DefaultTestData memory defaultData,
         address user,
         address recipient,
-        uint128 mintAmount,
-        uint128 transferAmount
+        uint256 mintAmount,
+        uint256 transferAmount
     ) public testWithPredefinedDefaultValues(defaultData) {
         vm.assume(user != address(0));
         vm.assume(recipient != address(0));
@@ -177,8 +177,8 @@ contract TransferTest is BaseTest {
         DefaultTestData memory defaultData,
         address user,
         address spender,
-        uint128 mintAmount,
-        uint128 approveAmount
+        uint256 mintAmount,
+        uint256 approveAmount
     ) public testWithPredefinedDefaultValues(defaultData) {
         vm.assume(user != address(0));
         vm.assume(spender != address(0));
