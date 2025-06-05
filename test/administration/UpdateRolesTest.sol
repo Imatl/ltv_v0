@@ -12,8 +12,9 @@ contract UpdateRolesTest is BaseTest {
         return selectors;
     }
 
-    function test_setAndCheckChangesApplied(DefaultTestData memory data, address newAddress) 
-        public testWithPredefinedDefaultValues(data) 
+    function test_setAndCheckChangesApplied(DefaultTestData memory data, address newAddress)
+        public
+        testWithPredefinedDefaultValues(data)
     {
         vm.assume(newAddress != address(0));
         vm.assume(newAddress != data.owner);
@@ -47,9 +48,7 @@ contract UpdateRolesTest is BaseTest {
         assertEq(ltv.guardian(), newAddress);
     }
 
-    function test_checkCanSetZeroAddresses(DefaultTestData memory data) 
-        public testWithPredefinedDefaultValues(data) 
-    {
+    function test_checkCanSetZeroAddresses(DefaultTestData memory data) public testWithPredefinedDefaultValues(data) {
         address oldEmergencyDeleverager = ltv.emergencyDeleverager();
         vm.startPrank(data.owner);
         vm.expectEmit(true, true, true, true, address(ltv));
@@ -75,8 +74,9 @@ contract UpdateRolesTest is BaseTest {
         assertEq(ltv.guardian(), address(0));
     }
 
-    function test_pickRandomRestrictedFunction(DefaultTestData memory data, address newAddress) 
-        public testWithPredefinedDefaultValues(data) 
+    function test_pickRandomRestrictedFunction(DefaultTestData memory data, address newAddress)
+        public
+        testWithPredefinedDefaultValues(data)
     {
         vm.assume(newAddress != address(0));
         vm.assume(newAddress != data.owner);
@@ -104,7 +104,7 @@ contract UpdateRolesTest is BaseTest {
         vm.startPrank(newAddress);
         vm.expectRevert(abi.encodeWithSelector(IAdministrationErrors.OnlyGovernorInvalidCaller.selector, newAddress));
         ltv.setTargetLTV(75 * 10 ** 16);
-        
+
         vm.expectRevert(abi.encodeWithSelector(IAdministrationErrors.OnlyGuardianInvalidCaller.selector, newAddress));
         ltv.setIsDepositDisabled(false);
         vm.stopPrank();
@@ -114,5 +114,4 @@ contract UpdateRolesTest is BaseTest {
         ltv.setIsDepositDisabled(false);
         vm.stopPrank();
     }
-
 }
