@@ -22,7 +22,7 @@ contract SetIsWithdrawDisabledTest is PrepareEachFunctionSuccessfulExecution {
     function withdrawDisabledCalls(address user) public pure returns (bytes[] memory) {
         bytes[] memory selectors = new bytes[](9);
         uint256 amount = 1000;
-        
+
         selectors[0] = abi.encodeCall(ILTV.executeLowLevelRebalanceShares, (-int256(amount)));
         selectors[1] = abi.encodeCall(ILTV.redeem, (amount, user, user));
         selectors[2] = abi.encodeCall(ILTV.withdraw, (amount, user, user));
@@ -37,10 +37,10 @@ contract SetIsWithdrawDisabledTest is PrepareEachFunctionSuccessfulExecution {
 
     function prepareWithdrawDisabledTest(address user) public {
         prepareEachFunctionSuccessfulExecution(user);
-        
+
         ltv.setFutureRewardBorrowAssets(0);
         ltv.setFutureBorrowAssets(10000);
-        ltv.setFutureCollateralAssets(10000); 
+        ltv.setFutureCollateralAssets(10000);
         ltv.setFutureRewardCollateralAssets(-100);
     }
 
